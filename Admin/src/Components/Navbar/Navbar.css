@@ -1,0 +1,115 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 60px;
+    box-shadow: 0 1px 3px -2px #8888;
+    margin-bottom: 1px;
+    background-color: rgb(16, 97, 6);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.logo-text h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    line-height: 1;
+}
+
+.logo-text span {
+    font-size: 14px;
+    color: #e0e0e0;
+    font-weight: 400;
+}
+
+/* Large screens (1024px and up) */
+@media screen and (min-width: 1024px) {
+    .navbar {
+        padding: 20px 80px;
+    }
+    
+    .logo-text h1 {
+        font-size: 28px;
+    }
+    
+    .logo-text span {
+        font-size: 16px;
+    }
+}
+
+/* Medium screens (tablets, 768px to 1023px) */
+@media screen and (max-width: 1023px) {
+    .navbar {
+        padding: 15px 40px;
+    }
+}
+
+/* Small screens (mobile, 480px to 767px) */
+@media screen and (max-width: 767px) {
+    .navbar {
+        padding: 12px 20px;
+    }
+    
+    .logo-text h1 {
+        font-size: 20px;
+    }
+    
+    .logo-text span {
+        font-size: 12px;
+    }
+}
+
+/* Extra small screens (smaller mobile devices, up to 479px) */
+@media screen and (max-width: 479px) {
+    .navbar {
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        gap: 5px;
+    }
+    
+    .logo-text {
+        margin-left: 5px;
+    }
+    
+    .logo-text h1 {
+        font-size: 18px;
+    }
+    
+    .logo-text span {
+        font-size: 11px;
+    }
+}
+
+/* For very small devices */
+@media screen and (max-width: 320px) {
+    .navbar {
+        padding: 8px 10px;
+    }
+    
+    .logo svg {
+        width: 30px;
+        height: 25px;
+    }
+    
+    .logo-text h1 {
+        font-size: 16px;
+    }
+    
+    .logo-text span {
+        font-size: 10px;
+    }
+}

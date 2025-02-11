@@ -1,0 +1,113 @@
+.productdisplay {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Left column with small images */
+  .productdisplay-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .productdisplay-left img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 1px solid #e5e5e5;
+  }
+  
+  .productdisplay-left img:hover {
+    border-color:  #0ed31e;
+  }
+  
+  /* Center column with main image */
+  .productdipslay-img {
+    flex: 2;
+  }
+  
+  .productdisplay-main-img {
+    width: 90%;
+    height: 500px;
+    object-fit: cover;
+  }
+  
+  /* Right column with product info */
+  .productdisplay-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .productdisplay-right h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+  }
+  
+  .productdisplay-right-prices {
+    font-size: 24px;
+    font-weight: 600;
+    color:  #0ed31e;
+  }
+  
+  .productdisplay-right-description {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.5;
+  }
+  
+  .productdisplay-right button {
+    width: 200px;
+    padding: 15px 0;
+    border-radius: 4px;
+    border: none;
+    background-color: #0ed31e;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .productdisplay-right button:hover {
+    background-color:  #2c532f;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 1024px) {
+    .productdisplay {
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+  
+    .productdisplay-left {
+      flex-direction: row;
+      justify-content: center;
+    }
+  
+    .productdisplay-left img {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .productdipslay-img {
+      width: 100%;
+    }
+  
+    .productdisplay-main-img {
+      height: 400px;
+    }
+  
+    .productdisplay-right {
+      align-items: center;
+      text-align: center;
+    }
+  }

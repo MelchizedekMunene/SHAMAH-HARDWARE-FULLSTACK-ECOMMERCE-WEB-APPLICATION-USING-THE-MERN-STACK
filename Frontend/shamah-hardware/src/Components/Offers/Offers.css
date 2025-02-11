@@ -1,0 +1,90 @@
+/* Offers Section Styling */
+.offers {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    background-color: hsl(0, 0%, 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.offers-left {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.offers-left h1 {
+    margin-bottom: 1rem;
+    color: rgba(13, 141, 19, 0.74);
+    font-size: 1.8rem;
+}
+
+.offers-left p {
+    font-size: 1rem;
+    color: rgba(13, 141, 19, 0.74);
+    margin-bottom: 1.5rem;
+}
+
+.offers-left button {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color:rgba(13, 141, 19, 0.74);
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+    border: none;
+    cursor: pointer;
+    max-width: 200px;
+}
+
+.offers-left button:hover {
+    background-color: #10e708;
+}
+
+.offers-left button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #10e708;
+}
+
+.offers-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.offers-right img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+}
+
+/* Media Queries for Offers section */
+@media(max-width: 48rem) {
+    .offers {
+        grid-template-columns: 1fr;
+    }
+
+    .offers-right img {
+        height: 300px;
+    }
+
+    .offers-left {
+        text-align: center;
+    }
+
+    .offers-left button {
+        align-self: center;
+        width: 100%;
+        max-width: none;
+    }
+}

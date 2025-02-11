@@ -1,0 +1,88 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    gap: 20px;
+    max-width: 250px;
+    width: 100%;
+    height: 100vh;
+    background: white;
+ }
+ 
+ .sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+    padding: 5px 10px;
+    border-radius: 6px;
+    gap: 20px;
+    background: hsla(0, 10%, 75%, 0.815);
+    cursor: pointer;
+ }
+ 
+ /* Desktop screens (1024px and up) */
+ @media screen and (min-width: 1024px) {
+    .sidebar {
+        max-width: 250px;
+        padding-top: 40px;
+    }
+    
+    .sidebar-item {
+        margin: 0 25px;
+        padding: 8px 15px;
+    }
+ }
+ 
+ /* Tablets (768px to 1023px) */
+ @media screen and (max-width: 768px) {
+    .sidebar {
+        max-width: 200px;
+        padding-top: 25px;
+        gap: 15px;
+    }
+    
+    .sidebar-item {
+        margin: 0 15px;
+        padding: 5px 8px;
+        gap: 15px;
+    }
+    
+    .sidebar-item img {
+        width: 20px;
+        height: auto;
+    }
+    
+    .sidebar-item p {
+        font-size: 14px;
+    }
+ }
+ 
+ /* Mobile screens (480px and below) */
+ @media screen and (max-width: 480px) {
+    .sidebar {
+        max-width: 100%;
+        height: auto;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .sidebar-item {
+        margin: 0 10px;
+        padding: 5px;
+        gap: 10px;
+        flex: 1;
+        max-width: 150px;
+    }
+    
+    .sidebar-item img {
+        width: 18px;
+    }
+    
+    .sidebar-item p {
+        font-size: 12px;
+    }
+ }
