@@ -10,12 +10,13 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:5173", 
+    origin: ["http://localhost:5173", "http://localhost:3000"],
     credentials: true
 }));
 
-//Database Connection with MongoDB
+//Database Connection with MongoDB 
 mongoose.connect("mongodb+srv://melchimunesh:j0Mqiwk1aXoEQtQg@cluster0.cbjsc.mongodb.net/shamah-hardware-backend")
+//Error handling
 .then(() => console.log("MongoDB connected successfully"))
 .catch((err) => console.error("MongoDB connection error:", err));
 
@@ -129,7 +130,7 @@ app.get('/allproducts',async (req, res)=>{
 
 //Schema creating for user model
 
-const users = mongoose.model('users' , {
+const users = mongoose.model('Users' , {
     name:{
         type: String,
     },
@@ -181,6 +182,29 @@ app.post('/signup', async (req, res)=> {
     res.json({success:true, token})
 });
 
+
+//Creating endpoint for user login
+app.post('/login', async (req, res) => {
+    let user = await users.findOne({email:req.body.email});
+    if(user) {
+        const passCompare = req.body.password === user.password;
+        if (passCompare) {
+            const data ={
+                user:{
+                    id:user.id,
+                }
+            }
+            const token = jwt.sign(data,'secret_ecom');
+            res.json({success:true,token});
+        }
+        else{
+            res.json({success:false,errors:"Wrong Password"});
+        }
+    }
+    else {
+        res.json({success:false,errors:"Wrong Email ID"});
+    }
+})
 
 //Generating Text on the terminal reflecting server status
 app.listen(port,(error)=> {
