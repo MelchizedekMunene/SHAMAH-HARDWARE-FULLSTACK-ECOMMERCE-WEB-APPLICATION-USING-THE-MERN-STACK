@@ -16,7 +16,7 @@ app.use(cors({
 
 //Database Connection with MongoDB 
 mongoose.connect("mongodb+srv://melchimunesh:j0Mqiwk1aXoEQtQg@cluster0.cbjsc.mongodb.net/shamah-hardware-backend")
-//Error handling
+//Error handling for database connection
 .then(() => console.log("MongoDB connected successfully"))
 .catch((err) => console.error("MongoDB connection error:", err));
 

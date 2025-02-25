@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './ListProduct.css'
 import cross_icon from '../../assets/cross_icon.png'
-import AddProduct from './AddProduct'
+import AddProduct from '../AddProduct/AddProduct'
 
 //CRUD Operations Page
 const ListProduct = () => {
@@ -38,8 +38,10 @@ const ListProduct = () => {
   }
 
   if (!allproducts || allproducts.length === 0) {
-    return <div>No products to display. <br />
-       Loading Products . . .  </div>
+    return <div>
+       Loading Products . . . <br />
+       No products to display. <br />
+       Check Your internet Connection and Retry </div>
   }
 
   return (
