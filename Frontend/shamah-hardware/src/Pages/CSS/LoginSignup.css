@@ -1,7 +1,7 @@
 .loginsignup {
     width: 100%;
     min-height: 80vh;
-    background-color: #e6f7e6; /* Light green background */
+    background-color: #e6f7e6; 
     padding-top: 5rem;
     display: flex;
     justify-content: center;
@@ -10,7 +10,7 @@
 
 .loginsignup-container {
     width: 90%;
-    max-width: 31.25rem; /* 500px equivalent */
+    max-width: 31.25rem; 
     background: white;
     margin: auto;
     padding: 2.5rem 3rem;
@@ -35,7 +35,7 @@
    height: 3.5rem;
    width: 100%;
    padding-left: 1.25rem;
-   border: 1px solid #c9c9c9; /* Fixed typo: "splid" to "solid" */
+   border: 1px solid #c9c9c9; 
    border-radius: 0.5rem;
    outline: none;
    color: #5c5c5c;
@@ -75,6 +75,7 @@
 
 .loginsignup-login span:hover {
     color: #0bb318;
+    text-decoration: underline;
 }
 
 .loginsignup-agree {
