@@ -10,9 +10,10 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:5173", "http://localhost:3000"],
+    origin: "*", // Temporarily allow all origins for testing
     credentials: true
 }));
+
 
 //Database Connection with MongoDB 
 mongoose.connect("mongodb+srv://melchimunesh:j0Mqiwk1aXoEQtQg@cluster0.cbjsc.mongodb.net/shamah-hardware-backend")
@@ -129,7 +130,6 @@ app.get('/allproducts',async (req, res)=>{
 })
 
 //Schema creating for user model
-
 const users = mongoose.model('Users' , {
     name:{
         type: String,
@@ -151,7 +151,6 @@ const users = mongoose.model('Users' , {
 })
 
 //Creating endpoint for registering users
-
 app.post('/signup', async (req, res)=> {
 
     let check = await users.findOne({email:req.body.email});

@@ -12,11 +12,10 @@ const Product = () => {
   const {productId} = useParams();
   const product = all_product.find((e)=> e.id=== Number(productId));
 
-/*
+
   console.log('Product ID:', productId);
   console.log('All Products:', all_product);
   console.log('Found Product:', product);
-*/
   
   return (
     <div>
