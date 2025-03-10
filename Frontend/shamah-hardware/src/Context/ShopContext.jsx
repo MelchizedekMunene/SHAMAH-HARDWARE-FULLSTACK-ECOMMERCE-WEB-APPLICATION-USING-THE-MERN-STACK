@@ -23,7 +23,6 @@ const ShopContextProvider = (props) => {
             console.log("Fetched Data:", data);
             setAll_Product(data);
         })
-    
         .catch((err) => console.error("Fetch error:", err));
     },[])
     

@@ -21,10 +21,10 @@ function App() {
      <Navbar />
      <Routes>
       <Route path='/' element={<Shop/>}/>
-      <Route path='/CONSTRUCTION' element={<ShopCategory banner={construction_banner} category='Construction'/>}/>
-      <Route path='/ELECTRICALS' element={<ShopCategory banner={electricals_banner} category='Electricals'/>}/>
-      <Route path='/PLUMBING' element={<ShopCategory banner={plumbing_banner} category='Plumbing'/>}/>
-      <Route path='/FARM TOOLS' element={<ShopCategory banner={Farmtools_banner} category='Farm Tools'/>}/>
+      <Route path='/CONSTRUCTION' element={<ShopCategory banner={construction_banner} category='construction'/>}/>
+      <Route path='/ELECTRICALS' element={<ShopCategory banner={electricals_banner} category='electricals'/>}/>
+      <Route path='/PLUMBING' element={<ShopCategory banner={plumbing_banner} category='plumbing'/>}/>
+      <Route path='/FARM TOOLS' element={<ShopCategory banner={Farmtools_banner} category='farm Tools'/>}/>
       <Route path='product' element={<Product/>}>
         <Route path=':productId' element={<Product/>}/>
       </Route>

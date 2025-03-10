@@ -205,6 +205,25 @@ app.post('/login', async (req, res) => {
     }
 })
 
+// Creating endpoint for new collection data
+app.get('/newcollections', async (req, res) => {
+    try {
+        const products = await Product.find({}).sort({ date: -1 });
+        console.log("Products found:", products.length);
+        
+        if (products.length <= 1) {
+            return res.status(200).json([]);
+        }
+        
+        const newcollection = products.slice(0, 8);
+        console.log("New Collection Fetched, items:", newcollection.length);
+        res.send(newcollection);
+    } catch (error) {
+        console.error("Error fetching new collections:", error);
+        res.status(500).send("Error fetching new collections");
+    }
+});
+
 //Generating Text on the terminal reflecting server status
 app.listen(port,(error)=> {
     if(!error)

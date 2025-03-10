@@ -2,13 +2,14 @@ import React, { useContext } from 'react'
 import './CSS/ShopCategory.css'
 import { ShopContext } from '../Context/ShopContext'
 import Item from '../Components/Item/Item'
+import BreadCrumb from '../Components/assets/breadcrum_arrow.png'
 
 const ShopCategory = (props) => {
   const {all_product} = useContext(ShopContext);
   
   // Filter products by category
   const filteredProducts = all_product.filter(item => 
-    item.category === props.category
+    item.category.toLowerCase() === props.category.toLowerCase()
   );
 
   return (
@@ -19,7 +20,7 @@ const ShopCategory = (props) => {
           <span>Showing 1-{filteredProducts.length}</span> out of {filteredProducts.length} products
         </p>
         <div className="shopcategory-sort">
-          Sort By <span class="dropdown"> > </span>
+          Sort By <span class="dropdown"> {BreadCrumb} </span>
         </div>
       </div>
       <div className="shopcategory-products">

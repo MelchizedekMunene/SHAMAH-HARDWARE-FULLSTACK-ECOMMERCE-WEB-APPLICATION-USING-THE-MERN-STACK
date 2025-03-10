@@ -5,7 +5,7 @@
     max-width: 100%;
     padding: 40px 20px;
     box-sizing: border-box;
-    overflow-x: hidden;
+    overflow-x: hidden; 
 }
 
 .shop-category img {
@@ -15,9 +15,11 @@
     object-fit: cover;
     margin-bottom: 30px;
 }
+
 .dropdown {
     display: inline-block;
     transform: rotate(90deg);
+    margin-left: 5px; /* Add some spacing */
 }
 
 .shopcategory-indexSort {
@@ -42,10 +44,12 @@
     padding: 10px 20px;
     border-radius: 40px;
     border: 1px solid #888;
-    display: flex;
+    display: inline-flex; /* Change to inline-flex */
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    max-width: 50px; /* Limit maximum width */
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .shopcategory-sort img {
@@ -62,6 +66,7 @@
     padding: 0 10px;
     box-sizing: border-box;
     max-width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 /* Responsive Design */
@@ -96,6 +101,11 @@
         margin: 0px 10px;
         flex-direction: column;
         gap: 10px;
+        align-items: flex-start; /* Align items to start */
+    }
+    
+    .shopcategory-sort {
+        align-self: flex-start; /* Prevent full-width button */
     }
 }
 
