@@ -215,7 +215,7 @@ app.get('/newcollections', async (req, res) => {
             return res.status(200).json([]);
         }
         
-        const newcollection = products.slice(0, 8);
+        const newcollection = products.slice(0, 4);
         console.log("New Collection Fetched, items:", newcollection.length);
         res.send(newcollection);
     } catch (error) {
@@ -223,6 +223,35 @@ app.get('/newcollections', async (req, res) => {
         res.status(500).send("Error fetching new collections");
     }
 });
+
+//Creating endpoint for the featured products data
+app.get('/featuredproducts', async (req, res) => {
+    try {
+      // Ensure you're using the correct model and query
+      let products = await Product.find({ category: "construction" });
+      
+      // Check if products were found
+      if (!products || products.length === 0) {
+        return res.status(404).json({ 
+          message: "No products found in the construction category" 
+        });
+      }
+  
+      // Slice the first 4 products
+      let featuredProducts = products.slice(0, 4);
+      
+      console.log(`Found ${featuredProducts.length} featured products`);
+      
+      // Send the products with appropriate status code
+      res.status(200).json(featuredProducts);
+    } catch (error) {
+      console.error("Error fetching featured products:", error);
+      res.status(500).json({ 
+        message: "Error fetching featured products", 
+        error: error.message 
+      });
+    }
+  });
 
 //Generating Text on the terminal reflecting server status
 app.listen(port,(error)=> {
