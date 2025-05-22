@@ -12,7 +12,6 @@ import electricals_banner from './Components/assets/Electricals-banner-1.jpg';
 import plumbing_banner from './Components/assets/Plumbing-banner-2.jpg';
 import Farmtools_banner from './Components/assets/Farmtools-banner-1.jpg';
 
-
 function App() {
   return (
     <div>

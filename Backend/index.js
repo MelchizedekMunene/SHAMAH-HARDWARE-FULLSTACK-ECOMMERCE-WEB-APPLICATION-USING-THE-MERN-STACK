@@ -7,10 +7,9 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 
-
 app.use(express.json());
 app.use(cors({
-    origin: "*", // Temporarily allow all origins for testing
+    origin: "*",
     credentials: true
 }));
 
@@ -295,7 +294,7 @@ app.post('/getcart',fetchUser,async(req,res)=>{
     let userData = await users.findOne({_id:req.user.id});
     res.json(userData.cartData);
 })
-
+       
 //Generating Text on the terminal reflecting server status
 app.listen(port,(error)=> {
     if(!error)
