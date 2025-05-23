@@ -128,6 +128,49 @@ app.get('/allproducts',async (req, res)=>{
     res.send(products);
 })
 
+//Creating API for searching products
+app.get('/search', async (req, res) => {
+    try {
+        const { query } = req.query;
+        
+        if (!query) {
+            return res.status(400).json({ 
+                success: false, 
+                message: "Search query is required" 
+            });
+        }
+
+        // Create a case-insensitive regex for the search
+        const searchRegex = new RegExp(query, 'i');
+        
+        // Search across name, category, and description fields
+        const products = await Product.find({
+            $or: [
+                { name: { $regex: searchRegex } },
+                { category: { $regex: searchRegex } },
+                { description: { $regex: searchRegex } }
+            ],
+            available: true // Only show available products
+        }).sort({ date: -1 }); // Sort by newest first
+        
+        console.log(`Search for "${query}" returned ${products.length} products`);
+        
+        res.json({
+            success: true,
+            results: products,
+            count: products.length
+        });
+        
+    } catch (error) {
+        console.error("Search error:", error);
+        res.status(500).json({ 
+            success: false, 
+            message: "Error performing search", 
+            error: error.message 
+        });
+    }
+});
+
 //Schema creating for user model
 const users = mongoose.model('Users' , {
     name:{
@@ -306,4 +349,3 @@ app.listen(port,(error)=> {
         console.log("Error : "+error);
     }
 });
-
