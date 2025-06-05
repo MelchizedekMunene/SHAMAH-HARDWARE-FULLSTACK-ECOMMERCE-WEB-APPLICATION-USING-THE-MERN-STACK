@@ -1,5 +1,5 @@
 .hero {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 150px);
     position: relative;
     overflow: hidden;
 }
@@ -45,30 +45,6 @@
     filter: brightness(0.8);
 }
 
-.hero-latest-button {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    cursor: pointer;
-    padding: 12px 24px;
-    color: #ffffff;
-    background: #000000;
-    border-radius: 25px;
-    font-weight: 600;
-    width: fit-content;
-    font-size: 16px; 
-    transition: all 0.3s ease;
-}
-
-.hero-latest-button:hover {
-    background:  #0ed31e;
-    transform: translateY(-2px);
-}
-
-.hero-latest-button img {
-    width: 20px;
-    height: auto;
-}
 
 @media screen and (max-width: 1024px) {
     .hero-left {
@@ -104,9 +80,47 @@
     .hero-hand-icon img {
         width: 50px;
     }
+}
 
-    .hero-latest-button {
-        margin: 0 auto;
+.hero-search-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+.hero-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-height: 500px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 10px;
+}
+
+/* Alternative: If you want results to appear below the hero section */
+.hero-search-results-below {
+    width: 100%;
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hero-search-section {
+    position: relative;
+    z-index: 100;
+}
+
+@media screen and (max-width: 768px) {
+    .hero-search-section {
+        max-width: 100%;
+        margin: 15px 0;
     }
 }
 

@@ -1,4 +1,7 @@
-const port = 4001;
+// Load environment variables first
+require('dotenv').config();
+
+const port = process.env.PORT;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -13,9 +16,8 @@ app.use(cors({
     credentials: true
 }));
 
-
-//Database Connection with MongoDB 
-mongoose.connect("mongodb+srv://melchimunesh:j0Mqiwk1aXoEQtQg@cluster0.cbjsc.mongodb.net/shamah-hardware-backend")
+//Database Connection with MongoDB using environment variable
+mongoose.connect(process.env.MONGODB_URI)
 //Error handling for database connection
 .then(() => console.log("MongoDB connected successfully"))
 .catch((err) => console.error("MongoDB connection error:", err));
@@ -210,7 +212,6 @@ app.post('/signup', async (req, res)=> {
         cartData: cart,
     })
 
-
     await user.save();
 
     const data = {
@@ -219,10 +220,10 @@ app.post('/signup', async (req, res)=> {
         }
     }
 
-    const token = jwt.sign(data,'secret_ecom');
+    // Use environment variable for JWT secret
+    const token = jwt.sign(data, process.env.JWT_SECRET);
     res.json({success:true, token})
 });
-
 
 //Creating endpoint for user login
 app.post('/login', async (req, res) => {
@@ -235,7 +236,8 @@ app.post('/login', async (req, res) => {
                     id:user.id,
                 }
             }
-            const token = jwt.sign(data,'secret_ecom');
+            // Use environment variable for JWT secret
+            const token = jwt.sign(data, process.env.JWT_SECRET);
             res.json({success:true,token});
         }
         else{
@@ -303,7 +305,8 @@ app.get('/featuredproducts', async (req, res) => {
     }
     else{
         try{
-            const data = jwt.verify(token,'secret_ecom'); 
+            // Use environment variable for JWT secret
+            const data = jwt.verify(token, process.env.JWT_SECRET); 
             req.user = data.user;
             next();  
     } catch	(error) {
@@ -342,7 +345,7 @@ app.post('/getcart',fetchUser,async(req,res)=>{
 app.listen(port,(error)=> {
     if(!error)
     {
-        console.log("Server is running on Port "+port);
+        console.log("Server is running");
     }
     else
     {

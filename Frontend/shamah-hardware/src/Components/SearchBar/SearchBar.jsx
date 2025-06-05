@@ -1,4 +1,3 @@
-// 1. Create SearchBar.jsx component
 import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
 
@@ -17,20 +16,31 @@ const SearchBar = ({ onSearchResults, onClearSearch }) => {
         } else if (searchQuery.trim().length === 0) {
             onClearSearch();
         }
-    }, [searchQuery]);
+    }, [searchQuery, onClearSearch]);
 
     const performSearch = async (query) => {
         setIsLoading(true);
         try {
+            console.log('Searching for:', query); // Debug log
             const response = await fetch(`http://localhost:4001/search?query=${encodeURIComponent(query)}`);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             const data = await response.json();
+            console.log('Search response:', data); // Debug log
             
             if (data.success) {
                 onSearchResults(data.results, query);
                 setShowSuggestions(data.results.length > 0);
+            } else {
+                console.error('Search failed:', data.message);
+                onSearchResults([], query);
             }
         } catch (error) {
             console.error('Search error:', error);
+            onSearchResults([], query);
         } finally {
             setIsLoading(false);
         }
