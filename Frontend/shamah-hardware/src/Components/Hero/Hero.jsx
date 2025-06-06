@@ -1,29 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Hero.css';
-import SearchBar from '../SearchBar/SearchBar';
 import hero_image from '../assets/hero-image.jpg';
 
 const Hero = () => {
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearchActive, setIsSearchActive] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  const handleSearchResults = (results, query) => {
-    setSearchResults(results);
-    setSearchQuery(query);
-    setIsSearchActive(true);
-  };
-
-  const handleClearSearch = () => {
-    setSearchResults([]);
-    setIsSearchActive(false);
-    setSearchQuery('');
-  };
-
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
+  const handleSearchClick = () => {
+    navigate('/search');
   };
 
   return (
@@ -35,20 +19,19 @@ const Hero = () => {
     }}>
       <div className="hero-left">
         <div className="hero-text">
-          <div className="hero-hand-icon">
-            <p>Search for</p>
-            {/* <img src={hand_icon} alt='' /> */}
-          </div>
+          <p>Search for</p>
           <p>Products</p>
           <p>Here</p>
         </div>
         
-        {/* Search Bar Integration */}
+        {/* Search Button Section */}
         <div className="hero-search-section">
-          <SearchBar 
-            onSearchResults={handleSearchResults}
-            onClearSearch={handleClearSearch}
-          />
+          <button 
+            className="hero-search-button"
+            onClick={handleSearchClick}
+          >
+            🔍 Search Products
+          </button>
         </div>
       </div>
     </div>
