@@ -45,7 +45,7 @@
 .search-result-item:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
-    border-color: #007bff;
+    border-color: #40f708e3;
 }
 
 .search-result-image {
@@ -85,7 +85,7 @@
 }
 
 .search-result-price {
-    color: #007bff;
+    color: #12ec1d;
     font-size: 1.1rem;
     font-weight: bold;
     margin-top: 10px;

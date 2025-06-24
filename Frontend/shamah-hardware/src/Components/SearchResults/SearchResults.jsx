@@ -36,7 +36,7 @@ const SearchResults = ({ results, searchQuery, onProductClick }) => {
                                     ? product.description.substring(0, 100) + '...' 
                                     : product.description}
                             </p>
-                            <div className="search-result-price">${product.price}</div>
+                            <div className="search-result-price">Ksh.{product.price}</div>
                         </div>
                     </div>
                 ))}
