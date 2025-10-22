@@ -1,12 +1,18 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import './ProductDisplay.css'
 import { ShopContext } from '../../Context/ShopContext';
 
 const ProductDisplay = ( {product} ) => {
 
     const {addToCart} = useContext(ShopContext);
+    const [itemCount, setItemCount] = useState(0);
     
     if (!product) return null;
+
+    const handleAddToCart = () => {
+        addToCart(product.id);
+        setItemCount(prevCount => prevCount + 1);
+    }
 
   return (
     <div className="productdisplay">
@@ -28,7 +34,12 @@ const ProductDisplay = ( {product} ) => {
             <p>{product.description}</p>
         </div>
         <p>Category : <span>{product.category}</span></p>
-        <button onClick={()=>{addToCart(product.id)}}>ADD TO CART</button>
+        <button onClick={handleAddToCart}>ADD TO CART</button>
+        
+        <div className="productdisplay-counter">
+          <p className="counter-label">Quantity: </p>
+          <p className="counter-value">{itemCount}</p>
+        </div>
       </div>
     </div>
   )
