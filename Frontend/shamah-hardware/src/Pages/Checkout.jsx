@@ -48,7 +48,7 @@ const Checkout = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:4000/mpesa/stkpush', {
+      const response = await fetch('http://localhost:4001/mpesa/stkpush', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ const Checkout = () => {
       const data = await response.json();
       
       if (data.success) {
-        alert('Payment request sent! Please check your phone for the M-Pesa prompt.');
+        alert('Payment request sent! Please check your phone for the MPesa prompt.');
         // You can redirect to a payment status page here
         // window.location.href = '/payment-status';
       } else {

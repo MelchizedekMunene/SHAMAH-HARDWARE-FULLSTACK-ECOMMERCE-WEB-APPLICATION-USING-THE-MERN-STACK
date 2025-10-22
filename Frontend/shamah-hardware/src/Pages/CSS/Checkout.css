@@ -24,7 +24,7 @@
   color: #333;
   margin-bottom: 20px;
   font-size: 24px;
-  border-bottom: 2px solid #007bff;
+  border-bottom: 2px solid #39e903;
   padding-bottom: 10px;
 }
 
@@ -69,7 +69,7 @@
 
 .item-total {
   font-weight: bold;
-  color: #007bff !important;
+  color: #0eeb19 !important;
 }
 
 .order-total {
@@ -172,7 +172,7 @@
 }
 
 .form-group input {
-  width: 100%;
+  width: 90%;
   padding: 12px;
   border: 2px solid #e0e0e0;
   border-radius: 6px;
