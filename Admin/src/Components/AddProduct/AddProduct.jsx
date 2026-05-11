@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
+import { API_BASE_URL } from '../../config/api'
 
 // Add onProductAdded prop here
 const AddProduct = ({ onProductAdded }) => {
@@ -27,7 +28,7 @@ const AddProduct = ({ onProductAdded }) => {
       let formData = new FormData();
       formData.append('product', image);
 
-      const imageUploadResponse = await fetch('http://localhost:4001/upload', {
+      const imageUploadResponse = await fetch(`${API_BASE_URL}/upload`, {
         method: "POST",
         headers: {
           Accept: 'application/json',
@@ -43,7 +44,7 @@ const AddProduct = ({ onProductAdded }) => {
           image: responseData.image_url
         };
 
-        const productResponse = await fetch('http://localhost:4001/addproduct', {
+        const productResponse = await fetch(`${API_BASE_URL}/addproduct`, {
           method: "POST",
           headers: {
             Accept: 'application/json',

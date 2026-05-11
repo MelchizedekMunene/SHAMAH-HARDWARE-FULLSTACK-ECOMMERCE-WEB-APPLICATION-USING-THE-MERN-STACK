@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchBar from '../Components/SearchBar/SearchBar';
 import SearchResults from '../Components/SearchResults/SearchResults';
+import { API_BASE_URL } from '../config/api';
 import './CSS/SearchPage.css';
 
 const SearchPage = () => {
@@ -24,7 +25,7 @@ const SearchPage = () => {
     const performSearch = async (query) => {
         setIsLoading(true);
         try {
-            const response = await fetch(`http://localhost:4001/search?query=${encodeURIComponent(query)}`);
+            const response = await fetch(`${API_BASE_URL}/search?query=${encodeURIComponent(query)}`);
             const data = await response.json();
             
             if (data.success) {

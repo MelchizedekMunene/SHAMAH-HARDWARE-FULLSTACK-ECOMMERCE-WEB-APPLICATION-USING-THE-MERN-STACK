@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './NewCollections.css'
 import Item from '../Item/Item'
+import { API_BASE_URL } from '../../config/api'
 
 const NewCollections = () => {
   const [new_collection, setNew_collection] = useState([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:4001/newcollections')
+    fetch(`${API_BASE_URL}/newcollections`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

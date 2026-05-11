@@ -48,7 +48,7 @@ const Checkout = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:4001/mpesa/stkpush', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:4001'}/mpesa/stkpush`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

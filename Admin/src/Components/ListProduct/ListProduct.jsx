@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './ListProduct.css'
 import cross_icon from '../../assets/cross_icon.png'
 import AddProduct from '../AddProduct/AddProduct'
+import { API_BASE_URL } from '../../config/api'
 
 //CRUD Operations Page
 const ListProduct = () => {
@@ -10,7 +11,7 @@ const ListProduct = () => {
 
   const fetchInfo = async () => {
     try {
-      const response = await fetch('http://localhost:4001/allproducts');
+      const response = await fetch(`${API_BASE_URL}/allproducts`);
       const data = await response.json();
       setAllProducts(data);
       console.log('Fetched data:', data);
@@ -24,7 +25,7 @@ const ListProduct = () => {
   }, [])
 
   const remove_product = async (id)=> {
-    await fetch('http://localhost:4001/removeproduct',
+    await fetch(`${API_BASE_URL}/removeproduct`,
       {
         method:'POST',
         headers:{

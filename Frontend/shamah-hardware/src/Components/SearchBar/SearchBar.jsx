@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
+import { API_BASE_URL } from '../../config/api';
 
 const SearchBar = ({ onSearchResults, onClearSearch }) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -22,7 +23,7 @@ const SearchBar = ({ onSearchResults, onClearSearch }) => {
         setIsLoading(true);
         try {
             console.log('Searching for:', query); // Debug log
-            const response = await fetch(`http://localhost:4001/search?query=${encodeURIComponent(query)}`);
+            const response = await fetch(`${API_BASE_URL}/search?query=${encodeURIComponent(query)}`);
             
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
