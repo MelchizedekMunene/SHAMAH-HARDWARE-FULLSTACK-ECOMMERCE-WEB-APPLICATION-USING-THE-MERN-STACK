@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './AddProduct.css'
 import upload_area from '../../assets/upload_area.svg'
 import { API_BASE_URL } from '../../config/api'
+import AIProductPanel from '../AIProductPanel/AIProductPanel'
 
 // Add onProductAdded prop here
 const AddProduct = ({ onProductAdded }) => {
@@ -24,57 +25,79 @@ const AddProduct = ({ onProductAdded }) => {
     setProductDetails({...productDetails, [e.target.name]: e.target.value})
   }
 
+  // Handler for when description is generated via AI
+  const handleDescriptionGenerated = (generatedDesc) => {
+    setProductDetails({...productDetails, description: generatedDesc})
+  }
+
+  // Handler for when image is generated via AI
+  // imageUrl is already the full URL from the backend
+  const handleImageGenerated = (aiImageUrl) => {
+    setProductDetails({...productDetails, image: aiImageUrl})
+  }
+
   const Add_Product = async () => {
     try {
-      let formData = new FormData();
-      formData.append('product', image);
+      let imageUrl = productDetails.image;
 
-      const imageUploadResponse = await fetch(`${API_BASE_URL}/upload`, {
-        method: "POST",
-        headers: {
-          Accept: 'application/json',
-        },
-        body: formData,
-      });
+      // Only upload if it's not an AI-generated image
+      if (image && !productDetails.image.includes('upload/images/ai-')) {
+        let formData = new FormData();
+        formData.append('product', image);
 
-      const responseData = await imageUploadResponse.json();
-
-      if (responseData.success) {
-        const product = {
-          ...productDetails,
-          image: responseData.image_url
-        };
-
-        const productResponse = await fetch(`${API_BASE_URL}/addproduct`, {
+        const imageUploadResponse = await fetch(`${API_BASE_URL}/upload`, {
           method: "POST",
           headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json',
           },
-          body: JSON.stringify(product),
+          body: formData,
         });
 
-        const productData = await productResponse.json();
+        const responseData = await imageUploadResponse.json();
 
-        if (productData.success) {
-          alert("Product Added Successfully.");
-          // Reset form
-          setProductDetails({
-            name: "",
-            image: "",
-            category: "construction",
-            price: "",
-            quantity: "",
-            description: ""
-          });
-          setImage(false);
-          // Call the refresh function
-          if (onProductAdded) {
-            onProductAdded();
-          }
+        if (responseData.success) {
+          imageUrl = responseData.image_url;
         } else {
-          alert("Failed to add product.");
+          alert("Failed to upload image.");
+          return;
         }
+      }
+
+      // Build final product object with resolved image URL
+      const product = {
+        ...productDetails,
+        image: imageUrl
+      };
+
+      const productResponse = await fetch(`${API_BASE_URL}/addproduct`, {
+        method: "POST",
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      });
+
+      const productData = await productResponse.json();
+
+      if (productData.success) {
+        alert("Product Added Successfully.");
+        // Reset form
+        setProductDetails({
+          name: "",
+          image: "",
+          category: "construction",
+          price: "",
+          quantity: "",
+          description: ""
+        });
+        setImage(false);
+        // Call the refresh function
+        if (onProductAdded) {
+          onProductAdded();
+        }
+      } else {
+        alert("Failed to add product.");
       }
     } catch (error) {
       alert("Error: " + error.message);
@@ -113,10 +136,20 @@ const AddProduct = ({ onProductAdded }) => {
       <div className="addproduct-itemfield">
         <p>Product Image</p>
         <label htmlFor="file-input">
-          <img src={image?URL.createObjectURL(image):upload_area} className='addproduct-thumbnail-img' alt=""/>
+          <img src={productDetails.image ? (productDetails.image.startsWith('http') ? productDetails.image : productDetails.image) : (image ? URL.createObjectURL(image) : upload_area)} className='addproduct-thumbnail-img' alt=""/>
         </label>
         <input onChange={imageHandler} type="file" name='image' id='file-input' hidden/>
       </div>
+
+      {/* AI Product Generation Panel */}
+      <AIProductPanel
+        name={productDetails.name}
+        category={productDetails.category}
+        price={productDetails.price}
+        onDescriptionGenerated={handleDescriptionGenerated}
+        onImageGenerated={handleImageGenerated}
+      />
+
       <button onClick={()=>{Add_Product()}} className='addproduct-btn'>Add</button>
 
     </div>

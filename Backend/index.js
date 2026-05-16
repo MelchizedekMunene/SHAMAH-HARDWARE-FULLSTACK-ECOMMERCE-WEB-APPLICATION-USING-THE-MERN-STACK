@@ -10,6 +10,10 @@ const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
 
+// Import AI services
+const { generateProductDescription } = require('./services/aiService');
+const { generateAndSaveProductImage } = require('./services/imageService');
+
 app.use(express.json());
 app.use(cors({
     origin: "*",
@@ -39,6 +43,9 @@ const upload = multer({storage:storage});
 
 //Creating Upload Endpoint for images
 app.use('/images',express.static('upload/images'));
+
+// Serve AI-generated images with same path structure
+app.use('/upload',express.static(path.join(__dirname, 'upload')));
 
 app.post("/upload",upload.single('product'),(req,res)=> {
     const protocol = req.secure ? 'https' : 'http';
@@ -309,6 +316,33 @@ app.get('/featuredproducts', async (req, res) => {
       });
     }
   });
+
+//Creating endpoint for getting related products by category
+app.get('/relatedproducts/:category', async (req, res) => {
+    try {
+        const { category } = req.params;
+        
+        // Fetch products from the same category
+        let products = await Product.find({ category: category });
+        
+        if (!products || products.length === 0) {
+            return res.status(200).json([]);
+        }
+        
+        // Return up to 4 related products
+        let relatedProducts = products.slice(0, 4);
+        
+        console.log(`Found ${relatedProducts.length} related products for category: ${category}`);
+        
+        res.status(200).json(relatedProducts);
+    } catch (error) {
+        console.error('Error fetching related products:', error);
+        res.status(500).json({ 
+            message: 'Error fetching related products', 
+            error: error.message 
+        });
+    }
+});
 
 //Creating middleware to fetch user 
   const fetchUser = async(req,res,next)=>{
@@ -917,6 +951,46 @@ app.patch('/updateinventory', async (req, res) => {
             message: "Error updating inventory"
         });
     }
+});
+
+// ─── AI-Powered Product Generation Endpoints ──────────────────────────────────
+
+// POST /api/products/ai/description
+// Body: { name, category, price }
+// Returns: { description: "..." }
+app.post('/api/products/ai/description', async (req, res) => {
+  try {
+    const { name, category, price } = req.body;
+
+    if (!name || !name.trim()) {
+      return res.status(400).json({ message: "Product name is required" });
+    }
+
+    const description = await generateProductDescription({ name, category, price });
+    res.status(200).json({ description });
+  } catch (error) {
+    console.error("generateDescription error:", error.message);
+    res.status(500).json({ message: "Failed to generate description", error: error.message });
+  }
+});
+
+// POST /api/products/ai/image
+// Body: { name, category }
+// Returns: { imageUrl: "upload/images/ai-abc123.webp" }
+app.post('/api/products/ai/image', async (req, res) => {
+  try {
+    const { name, category } = req.body;
+
+    if (!name || !name.trim()) {
+      return res.status(400).json({ message: "Product name is required" });
+    }
+
+    const imageUrl = await generateAndSaveProductImage({ name, category });
+    res.status(200).json({ imageUrl });
+  } catch (error) {
+    console.error("generateImage error:", error.message);
+    res.status(500).json({ message: "Failed to generate image", error: error.message });
+  }
 });
 
 //Generating Text on the terminal reflecting server status
