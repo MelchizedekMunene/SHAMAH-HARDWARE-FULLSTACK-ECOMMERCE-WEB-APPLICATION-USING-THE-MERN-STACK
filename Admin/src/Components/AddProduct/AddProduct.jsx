@@ -96,6 +96,7 @@ const AddProduct = ({ onProductAdded }) => {
         if (onProductAdded) {
           onProductAdded();
         }
+
       } else {
         alert("Failed to add product.");
       }
