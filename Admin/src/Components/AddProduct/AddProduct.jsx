@@ -11,6 +11,7 @@ const AddProduct = ({ onProductAdded }) => {
     image: "",
     category: "construction",
     price: "",
+    quantity: "",
     description: ""
   })
 
@@ -63,6 +64,7 @@ const AddProduct = ({ onProductAdded }) => {
             image: "",
             category: "construction",
             price: "",
+            quantity: "",
             description: ""
           });
           setImage(false);
@@ -89,6 +91,10 @@ const AddProduct = ({ onProductAdded }) => {
         <div className="addproduct-itemfield">
           <p>Price</p>
           <input value={productDetails.price} onChange={changeHandler} type="text" name='price' placeholder='Type Here'/>
+        </div>
+        <div className="addproduct-itemfield">
+          <p>Stock Quantity</p>
+          <input value={productDetails.quantity} onChange={changeHandler} type="number" name='quantity' placeholder='0' min='0'/>
         </div>
       </div>
       <div className="addproduct-itemfield">

@@ -56,14 +56,49 @@
     font-weight: 600;
     color:  #0ed31e;
   }
+
+  /* Stock Status Badge */
+  .productdisplay-stock-status {
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 10px 0;
+    display: inline-block;
+  }
+
+  .in-stock-badge {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+  }
+
+  .low-stock-badge {
+    background-color: #fff3e0;
+    color: #e65100;
+    border: 1px solid #ffb74d;
+  }
+
+  .sold-out-badge {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef5350;
+  }
   
   .productdisplay-right-description {
     font-size: 16px;
     color: #666;
     line-height: 1.5;
   }
-  
-  .productdisplay-right button {
+
+  /* Quantity Control Section */
+  .productdisplay-quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+
+  .add-to-cart-btn {
     width: 200px;
     padding: 15px 0;
     border-radius: 4px;
@@ -75,9 +110,58 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
-  .productdisplay-right button:hover {
-    background-color:  #2c532f;
+
+  .add-to-cart-btn:hover {
+    background-color: #2c532f;
+  }
+
+  .add-to-cart-btn.sold-out-btn {
+    background-color: #d32f2f;
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  .add-to-cart-btn.sold-out-btn:hover {
+    background-color: #d32f2f;
+  }
+
+  .quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 2px solid #0ed31e;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .qty-btn {
+    width: 50px;
+    padding: 10px 0;
+    border: none;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .qty-btn:hover {
+    background-color: #0ed31e;
+    color: white;
+  }
+
+  .qty-btn.decrement:hover {
+    background-color: #d32f2f;
+  }
+
+  .qty-display {
+    flex: 1;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    min-width: 60px;
+    background-color: white;
   }
 
   /* Counter section */
@@ -139,5 +223,10 @@
 
     .productdisplay-counter {
       justify-content: center;
+    }
+
+    .quantity-controls,
+    .add-to-cart-btn {
+      width: 100%;
     }
   }

@@ -6,7 +6,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom';
 
 const CartItems = () => {
-    const {getTotalCartAmount,all_product,cartItems,removeFromCart} = useContext(ShopContext)
+    const {getTotalCartAmount, all_product, cartItems, removeFromCart, addToCart} = useContext(ShopContext)
 
   return (
     <div className='cartitem'>
@@ -28,7 +28,11 @@ const CartItems = () => {
                     <img src={e.image} alt="" className='carticon-product-icon' />
                     <p>{e.name}</p>
                     <p>{e.price}</p>
-                    <button className='cartitems-quantity'>{cartItems[e.id]}</button>
+                    <div className="cartitems-quantity-controls">
+                      <button className="qty-btn" onClick={() => removeFromCart(e.id)}>−</button>
+                      <span className="qty-display">{cartItems[e.id]}</span>
+                      <button className="qty-btn" onClick={() => addToCart(e.id)}>+</button>
+                    </div>
                     <p>{e.price * cartItems[e.id]}</p>
                     <img className='cartitems-remove-icon' src={remove_icon} onClick={()=>{removeFromCart(e.id)}} alt="" />
                   </div>

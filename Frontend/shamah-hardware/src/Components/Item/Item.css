@@ -1,16 +1,22 @@
 .item {
-    flex: 0 0 280px; /* Fixed width, no growing or shrinking */
+    flex: 0 0 200px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 0.625rem;
+    gap: 0.5rem;
     padding: 1rem;
     border-radius: 0.625rem;
     transition: all 0.3s ease;
     background-color: #f9f9f9;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+    position: relative;
+}
+
+.item.sold-out {
+    opacity: 0.7;
+    background-color: #f5f5f5;
 }
 
 .item:hover {
@@ -18,25 +24,73 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
+.item.sold-out:hover {
+    transform: none;
+    opacity: 0.7;
+}
+
+/* ── Image wrapper: square aspect ratio, no fixed height ── */
+.item-image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;        /* Keeps a square crop — no tall empty gaps */
+    border-radius: 0.5rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: #fff;     /* Clean white background for product images */
+}
+
 .item img {
     width: 100%;
-    height: 250px;
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;        /* 'contain' respects transparent-bg product images */
+    padding: 0.5rem;            /* Small breathing room inside the box */
     border-radius: 0.5rem;
     transition: transform 0.3s ease;
+    box-sizing: border-box;
 }
 
 .item:hover img {
-    transform: scale(1.02);
+    transform: scale(1.04);
+}
+
+/* ── Sold-out overlay: covers the FULL image, not just 50% ── */
+.sold-out-overlay {
+    position: absolute;
+    inset: 0;                   /* top/right/bottom/left: 0 — full coverage */
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sold-out-badge {
+    background: #e74c3c;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 0.35rem 0.85rem;
+    border-radius: 2rem;        /* Pill shape — modern & clean */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .item p {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #333;
     text-align: center;
-    margin: 0.5rem 0;
+    margin: 0.25rem 0 0;
     transition: color 0.3s ease;
+    line-height: 1.3;
+}
+
+.item.sold-out p {
+    color: #999;
 }
 
 .item-prices {
@@ -45,40 +99,31 @@
     align-items: center;
     width: 100%;
     gap: 1rem;
+    margin-top: auto;           /* Pushes price to the bottom of the card */
+    padding-bottom: 0.25rem;
 }
 
 .item-price-new {
     display: flex;
     align-items: center;
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     font-weight: 700;
+    color: #2ecc71;
 }
 
-/* Responsive adjustments */
+.item.sold-out .item-price-new {
+    color: #aaa;
+}
+
+/* ── Responsive ── */
 @media screen and (max-width: 768px) {
     .item {
-        flex: 0 0 240px;
-    }
-
-    .item img {
-        height: 200px;
-    }
-
-    .item-prices {
-        font-size: 0.9rem;
+        flex: 0 0 160px;
     }
 }
 
 @media screen and (max-width: 480px) {
     .item {
         flex: 0 0 calc(50% - 1rem);
-    }
-
-    .item img {
-        height: 180px;
-    }
-
-    .item-prices {
-        font-size: 0.8rem;
     }
 }

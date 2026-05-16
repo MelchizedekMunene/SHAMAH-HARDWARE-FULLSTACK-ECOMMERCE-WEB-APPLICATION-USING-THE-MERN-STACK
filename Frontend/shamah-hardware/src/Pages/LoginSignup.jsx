@@ -8,7 +8,8 @@ const LoginSignup = () => {
   const [formData,setFormData] = useState({
     username:"",
     password:"",
-    email:""
+    email:"",
+    phone:""
   })
 
   const changeHandler = (e) => {
@@ -66,6 +67,8 @@ const LoginSignup = () => {
           {state === "Sign Up" ?
           <input name="username" value={formData.username} onChange={changeHandler} type="text" placeholder="Enter Name" />:<></>}
           <input name="email" value={formData.email} onChange={changeHandler} type="email" placeholder="Email Address" />
+          {state === "Sign Up" ?
+          <input name="phone" value={formData.phone} onChange={changeHandler} type="tel" placeholder="Phone Number (e.g., 0712345678)" />:<></>}
           <input name="password" value={formData.password} onChange={changeHandler} type="password" placeholder="password" />
         </div>
         <button onClick={() => {state === "Login" ? login() : signup()}}>Continue</button>

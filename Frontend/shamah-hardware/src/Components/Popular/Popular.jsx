@@ -10,7 +10,21 @@ const Popular = () => {
   useEffect(()=>{
     fetch(`${API_BASE_URL}/featuredproducts`)
     .then((response)=>response.json())
-    .then((data)=>setFeatured_Products(data));
+    .then((data)=>{
+      // Check if data is an array before setting state
+      if(Array.isArray(data)){
+        setFeatured_Products(data);
+      } else if(data.results && Array.isArray(data.results)){
+        setFeatured_Products(data.results);
+      } else {
+        console.error("Invalid response format:", data);
+        setFeatured_Products([]);
+      }
+    })
+    .catch((error)=>{
+      console.error("Error fetching featured products:", error);
+      setFeatured_Products([]);
+    });
   },[])
 
 
@@ -20,7 +34,7 @@ const Popular = () => {
       <hr />
       <div className="popular-item">
         {featured_Products.map((item, i) =>{
-          return <Item key={i} id={item.id} name={item.name} image={item.image} price={item.price} />
+          return <Item key={i} id={item.id} name={item.name} image={item.image} price={item.price} quantity={item.quantity} />
         })}
       </div>
     </div>

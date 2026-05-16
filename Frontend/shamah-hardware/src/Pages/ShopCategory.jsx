@@ -25,7 +25,7 @@ const ShopCategory = (props) => {
       </div>
       <div className="shopcategory-products">
         {filteredProducts.map((item, i) => (
-          <Item key={i} id={item.id} name={item.name} image={item.image} price={item.price} />
+          <Item key={i} id={item.id} name={item.name} image={item.image} price={item.price} quantity={item.quantity} />
         ))}
       </div>
       <div className="shopcategory-loadmore">

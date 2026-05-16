@@ -17,11 +17,20 @@ const NewCollections = () => {
       })
       .then((data) => {
         console.log('Fetched data:', data);
-        setNew_collection(data);
+        // Check if data is an array before setting state
+        if(Array.isArray(data)){
+          setNew_collection(data);
+        } else if(data.results && Array.isArray(data.results)){
+          setNew_collection(data.results);
+        } else {
+          console.error("Invalid response format:", data);
+          setNew_collection([]);
+        }
       })
       .catch((error) => {
         console.error('Error fetching new collections:', error);
         setError(error.message);
+        setNew_collection([]);
       });
   }, []);
 
@@ -41,6 +50,7 @@ const NewCollections = () => {
             name={item.name} 
             image={item.image} 
             price={item.price}
+            quantity={item.quantity}
           />
         ))}
       </div>

@@ -11,6 +11,7 @@ let data_product = [
         category: "Construction",
         image: p74_img,
         price: 790.0,
+        quantity: 50,
     },
     {
         id: 75,
@@ -19,6 +20,7 @@ let data_product = [
         category: "Electricals",
         image: p75_img,
         price: 150.0,
+        quantity: 100,
     },
     {
         id: 76,
@@ -27,6 +29,7 @@ let data_product = [
         category: "Plumbing",
         image: p76_img,
         price: 800.0,
+        quantity: 75,
     },
     {
         id: 77,
@@ -35,6 +38,7 @@ let data_product = [
         category: "Plumbing",
         image: p77_img,
         price: 3500.0,
+        quantity: 30,
     },
 ];
 

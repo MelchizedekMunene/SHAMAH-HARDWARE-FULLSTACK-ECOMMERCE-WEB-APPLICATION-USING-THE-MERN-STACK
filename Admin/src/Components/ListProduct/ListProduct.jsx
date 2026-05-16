@@ -54,19 +54,24 @@ const ListProduct = () => {
           <p>Products</p>
           <p>Title</p>
           <p>Price</p>
+          <p>Stock</p>
+          <p>Status</p>
           <p>Category</p>
-          <p>Description</p>
           <p>Remove</p>
         </div>
         <div className="listproduct-allproducts">
           <hr />
           {allproducts.map((product)=>{
+              const stockStatus = product.quantity > 50 ? 'In Stock' : product.quantity > 0 ? 'Low Stock' : 'Out of Stock';
+              const stockColor = product.quantity > 50 ? '#0ed31e' : product.quantity > 0 ? '#ffc107' : '#d32f2f';
+              
               return <> <div key={product.id} className="listproduct-format-main listproduct-format">
                 <img src={product.image} alt="" className='listproduct-product-icon'/>
                 <p data-label="Title">{product.name}</p>
                 <p data-label="Price">Ksh.{product.price}</p>
+                <p data-label="Stock">{product.quantity || 0}</p>
+                <p data-label="Status" style={{color: stockColor, fontWeight: '600'}}>{stockStatus}</p>
                 <p data-label="Category">{product.category}</p>
-                <p data-label="Description">{product.description}</p>
                 <img onClick={() => {remove_product(product.id)}} src={cross_icon} alt="" className='listproduct-remove-item' />
               </div>
               <hr />

@@ -75,6 +75,11 @@ const Product = mongoose.model("Product",{
         type:Number,
         required:true,
     },
+    quantity:{
+        type:Number,
+        default:0,
+        required:true,
+    },
     date:{
         type:Date,
         default:Date.now,
@@ -104,6 +109,7 @@ app.post('/addproduct',async (req,res)=>{
         category:req.body.category,
         description:req.body.description,
         price:req.body.price,
+        quantity:req.body.quantity || 0,
     });
     console.log(product);
     await product.save();
@@ -187,6 +193,10 @@ const users = mongoose.model('Users' , {
     password:{
         type: String,
     },
+    phone:{
+        type:String,
+        default:"",
+    },
     cartData:{
         type: Object,
     },
@@ -211,6 +221,7 @@ app.post('/signup', async (req, res)=> {
         name: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        phone: req.body.phone || "",
         cartData: cart,
     })
 
@@ -838,6 +849,75 @@ app.get('/mpesa/payments', fetchUser, async (req, res) => {
     }
 });
 
+// Get all registered users (Admin only)
+app.get('/getusers', async (req, res) => {
+    try {
+        const allUsers = await users.find({});
+        
+        // Map users to include only necessary fields and format dates
+        const usersList = allUsers.map((user) => ({
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            phone: user.phone || "N/A",
+            dateJoined: new Date(user.date).toLocaleDateString(),
+            totalItems: user.cartData ? Object.values(user.cartData).reduce((a, b) => a + b, 0) : 0,
+        }));
+
+        console.log(`Fetched ${usersList.length} users`);
+        res.json({
+            success: true,
+            users: usersList,
+            count: usersList.length
+        });
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error fetching users"
+        });
+    }
+});
+
+// Update product inventory
+app.patch('/updateinventory', async (req, res) => {
+    try {
+        const { productId, newQuantity } = req.body;
+
+        if (!productId || newQuantity === undefined) {
+            return res.status(400).json({
+                success: false,
+                message: "Product ID and new quantity are required"
+            });
+        }
+
+        const product = await Product.findOneAndUpdate(
+            { id: productId },
+            { quantity: newQuantity },
+            { new: true }
+        );
+
+        if (!product) {
+            return res.status(404).json({
+                success: false,
+                message: "Product not found"
+            });
+        }
+
+        console.log(`Updated product ${productId} inventory to ${newQuantity}`);
+        res.json({
+            success: true,
+            message: "Inventory updated successfully",
+            product: product
+        });
+    } catch (error) {
+        console.error("Error updating inventory:", error);
+        res.status(500).json({
+            success: false,
+            message: "Error updating inventory"
+        });
+    }
+});
 
 //Generating Text on the terminal reflecting server status
 app.listen(port,(error)=> {

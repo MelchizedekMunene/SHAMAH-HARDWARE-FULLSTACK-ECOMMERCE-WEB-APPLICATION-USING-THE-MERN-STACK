@@ -11,5 +11,6 @@
         "PESA",
         "removeproduct",
         "shamah"
-    ]
+    ],
+    "git.ignoreLimitWarning": true
 }

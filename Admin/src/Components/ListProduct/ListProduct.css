@@ -1,21 +1,21 @@
 .listproduct {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 30px;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    background-color: #f8f9fa;
 }
 
 .listproduct h1 {
     color: #333;
     font-size: 24px;
     margin-bottom: 20px;
+    font-weight: 700;
 }
 
 .listproduct-format-main {
     display: grid;
-    grid-template-columns: 0.8fr 1fr 0.5fr 0.8fr 1.5fr 0.5fr;
+    grid-template-columns: 0.8fr 1fr 0.6fr 0.6fr 1fr 0.8fr 0.5fr;
     gap: 10px;
     align-items: center;
     padding: 10px;

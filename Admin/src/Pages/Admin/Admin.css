@@ -1,9 +1,206 @@
 .admin {
     display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #f8f9fa;
+    overflow: hidden;
 }
 
-@media(max-width:800px) {
+.admin-content {
+    flex: 1;
+    margin-left: 250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-dashboard,
+.admin-inventory {
+    padding: 40px;
+    background-color: #f8f9fa;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.admin-dashboard h1,
+.admin-inventory h1 {
+    color: #1a1a2e;
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.admin-dashboard p,
+.admin-inventory p {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 35px;
+    line-height: 1.5;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 28px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e8e8e8;
+    border-left: 4px solid #0ed31e;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(14, 211, 30, 0.15);
+    border-left-color: #2c9f1f;
+}
+
+.dashboard-card h3 {
+    margin: 0 0 16px 0;
+    color: #666;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.dashboard-card p {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0ed31e;
+    line-height: 1;
+}
+
+.inventory-content {
+    background: white;
+    border-radius: 8px;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .admin-content {
+        margin-left: 200px;
+    }
+
+    .admin-dashboard,
+    .admin-inventory {
+        padding: 30px;
+    }
+
+    .admin-dashboard h1,
+    .admin-inventory h1 {
+        font-size: 28px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    .dashboard-card {
+        padding: 20px;
+    }
+
+    .dashboard-card h3 {
+        font-size: 12px;
+        margin-bottom: 12px;
+    }
+
+    .dashboard-card p {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
     .admin {
         flex-direction: column;
+    }
+
+    .admin-content {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .admin-dashboard,
+    .admin-inventory {
+        padding: 20px;
+    }
+
+    .admin-dashboard h1,
+    .admin-inventory h1 {
+        font-size: 24px;
+    }
+
+    .dashboard-card {
+        padding: 16px;
+    }
+
+    .dashboard-card h3 {
+        font-size: 11px;
+        margin-bottom: 8px;
+    }
+
+    .dashboard-card p {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .admin-content {
+        margin-left: 60px;
+        height: calc(100vh - 0px);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .admin-dashboard,
+    .admin-inventory {
+        padding: 15px;
+    }
+
+    .admin-dashboard h1,
+    .admin-inventory h1 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .admin-dashboard p,
+    .admin-inventory p {
+        margin-bottom: 20px;
+        font-size: 13px;
+    }
+
+    .dashboard-card {
+        padding: 14px;
+    }
+
+    .dashboard-card h3 {
+        font-size: 10px;
+        margin-bottom: 6px;
+    }
+
+    .dashboard-card p {
+        font-size: 18px;
     }
 }
