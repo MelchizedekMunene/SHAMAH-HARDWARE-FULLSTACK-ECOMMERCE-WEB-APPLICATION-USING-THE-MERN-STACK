@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './ListProduct.css'
 import cross_icon from '../../assets/cross_icon.png'
-import AddProduct from '../AddProduct/AddProduct'
 import { API_BASE_URL } from '../../config/api'
 
 //CRUD Operations Page
@@ -46,9 +45,7 @@ const ListProduct = () => {
   }
 
   return (
-    <div>
-      <AddProduct onProduct={fetchInfo} />
-      <div className='listproduct'>
+    <div className='listproduct'>
         <h1>All Products List</h1>
         <div className="listproduct-format-main">
           <p>Products</p>
@@ -78,7 +75,6 @@ const ListProduct = () => {
               </>
             })}
         </div>
-      </div>
     </div>
   )
 }
